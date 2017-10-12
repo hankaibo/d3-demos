@@ -1,0 +1,26 @@
+# 日志
+logs
+*.log
+
+# 运行时产生的数据
+pids
+*.pid
+*.seed
+
+# 用户环境变量
+.lock-wscript
+
+# 系统生成文件 #
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Node Files #
+/node_modules/
+/bower_components/
+npm-debug.log
+/npm-debug.log.*
+
+# yarn
+yarn.lock
