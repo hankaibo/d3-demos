@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>working-with-array</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+
+<body>
+  <script>
+    var array = [3, 2, 11, 7, 6, 4, 10, 8, 15];
+    d3.select('#min').text(d3.min(array));
+    d3.select('#max').text(d3.max(array));
+    d3.select('#extent').text(d3.extent(array));
+    d3.select('#sum').text(d3.sum(array));
+    d3.select('#median').text(d3.median(array));
+    d3.select('#mean').text(d3.mean(array));
+    d3.select('#asc').text(d3.sort(d3.ascending));
+  </script>
+
+</body>
+
+</html>

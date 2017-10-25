@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>raw-selection</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+
+<body>
+  <p>d3.v3:一个数组，该数组对象包含所匹配元素的数组，外加一个parentNode对象。</p>
+  <p>d3.v4:一个对象，包含匹配元素组成的数组对象_groups和一个_parents对象。</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>10:22</td>
+        <td>Purchase</td>
+        <td>$10.00</td>
+      </tr>
+      <tr>
+        <td>12:12</td>
+        <td>Purchase</td>
+        <td>$12.50</td>
+      </tr>
+      <tr>
+        <td>14:11</td>
+        <td>Expense</td>
+        <td>70</td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    var rows = d3.selectAll('tr');
+    var headerElement = rows._groups[0][0];
+    d3.select(headerElement).attr('class', 'table-header');
+    d3.select(rows._groups[0][1]).attr('class', 'table-row-odd');
+    d3.select(rows._groups[0][2]).attr('class', 'table-row-even');
+    d3.select(rows._groups[0][3]).attr('class', 'table-row-odd');
+  </script>
+</body>
+
+</html>

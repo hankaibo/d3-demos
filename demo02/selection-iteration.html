@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>selection-iteration</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+
+<body>
+  <p>选集本质上来说是增强的数组。</p>
+  <p>this为指向当前DOM元素的引用</p>
+  <p>第一个参数d表示这个元素的数据绑定</p>
+  <p>第二个参数i指当前迭代元素在整个选集中的索引值。索引值从0开始，每次迭代依次递增1。</p>
+  <div></div>
+  <div></div>
+  <div></div>
+  <script>
+    d3.selectAll('div')
+      .attr('class', 'red box')
+      .each(function (d, i) { // d,i是可选参数；隐含参数是this
+        d3.select(this).append('h1').text(i);
+      });
+  </script>
+</body>
+
+</html>

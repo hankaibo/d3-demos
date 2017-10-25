@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>function-chain</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+
+<body>
+  <p>select,append,insert返回一个新的选集。</p>
+  <script>
+    var body = d3.select('body');
+    body.append('section')
+      .attr('id', 'section1')
+      .append('div') // 返回一个新的选集。
+      .attr('class', 'blue box')
+      .append('p')
+      .text('dynamic blue box');
+
+    body.append('section')
+      .attr('id', 'section2')
+      .append('div')
+      .attr('class', 'red box')
+      .append('p')
+      .text('dynamic red box');
+  </script>
+</body>
+
+</html>
