@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>color-interpolation</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+
+<body>
+  <div id="color" class="clear">
+    <span>Linear Color Interpolation
+      <br>
+    </span>
+  </div>
+  <div id="color-diverge" class="clear">
+    <span>Poly-Linear Color Interpolation
+      <br>
+    </span>
+  </div>
+
+  <div class="control-group clear">
+      <button onclick="render(data, divergingScale(5), '#color-diverge')">Pivot at 5</button>
+      <button onclick="render(data, divergingScale(10), '#color-diverge')">Pivot at 10</button>
+      <button onclick="render(data, divergingScale(15), '#color-diverge')">Pivot at 15</button>
+      <button onclick="render(data, divergingScale(20), '#color-diverge')">Pivot at 20</button>
+  </div>
+
+  <script>
+    var max = 21,
+      data = [];
+    var colorScale = d3.scaleLinear()
+      .domain([0, max])
+      .range(['white', '#4169e1']);
+
+    function divergingScale(pivot) {
+      var divergingColorScale = d3.scaleLinear()
+        .domain([0, pivot, max])
+        .range(['white', '#4169e1', 'white']);
+      return divergingColorScale;
+    }
+    for (var i = 0; i < max; i++) {
+      data.push(i);
+    }
+
+    function render(data, scale, selector) {
+      d3.select(selector).selectAll('div.cell')
+        .data(data)
+        .enter()
+        .append('div')
+        .classed('cell', true)
+        .append('span');
+      d3.select(selector).selectAll('div.cell')
+        .data(data)
+        .exit()
+        .remove();
+      d3.select(selector).selectAll('div.cell')
+        .data(data)
+        .style('display', 'inline-block')
+        .style('background-color', function (d, i) {
+          return scale(d);
+        })
+        .select('span')
+        .text(function (d, i) {
+          return i;
+        });
+    }
+    render(data, colorScale, '#color');
+    render(data, divergingScale(5), '#color-diverge');
+
+    // document.getElementById('color-interpolation').addEventListener('click', function (e) {
+    //   render(data, divergingScale(e.target.value), '#color-diverge');
+    // });
+  </script>
+</body>
+
+</html>
