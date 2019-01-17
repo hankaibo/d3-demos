@@ -11,50 +11,46 @@
 </head>
 
 <body>
-  <div id="time" class="clear">
-    <span>Linear Time Progression
-      <br>
-    </span>
-    <span>Mapping [01/01/2013, 12/31/2013] to [0, 1200]
-      <br>
-    </span>
-  </div>
-  <script>
-    var start = new Date(2012, 0, 1),
-      end = new Date(2012, 11, 31),
-      range = [0, 1200],
-      time = d3.scaleTime().domain([start, end])
-      .rangeRound(range),
-      max = 12,
-      data = [];
-    for (var i = 0; i < max; i++) {
-      var date = new Date(start.getTime());
-      date.setMonth(start.getMonth() + i);
-      data.push(date);
-    }
+<div id="time" class="clear">
+  <p>Linear Time Progression</p>
+  <p>Mapping [01/01/2013, 12/31/2013] to [0, 1200]</p>
+</div>
+<script>
+let start = new Date(2012, 0, 1),
+  end = new Date(2012, 11, 31),
+  range = [0, 1200],
+  time = d3.scaleTime().domain([start, end]).rangeRound(range),
+  max = 12,
+  data = [];
+for (let i = 0; i < max; i++) {
+  let date = new Date(start.getTime());
+  date.setMonth(start.getMonth() + i);
+  data.push(date);
+}
 
-    function render(data, scale, selector) {
-      d3.select(selector).selectAll('div.fixed-cell')
-        .data(data)
-        .enter()
-        .append('div')
-        .classed('fixed-cell', true);
-      d3.select(selector).selectAll('div.fixed-cell')
-        .data(data)
-        .exit()
-        .remove();
-      d3.select(selector).selectAll('div.fixed-cell')
-        .data(data)
-        .style('margin-left', function (d) {
-          return scale(d) + 'px';
-        })
-        .html(function (d) {
-          var format = d3.timeFormat('%x');
-          return format(d) + '<br>' + scale(d) + 'px';
-        });
-    }
-    render(data, time, '#time');
-  </script>
+function render(data, scale, selector) {
+  d3.select(selector).selectAll('div.fixed-cell')
+    .data(data)
+    .enter()
+    .append('div')
+    .classed('fixed-cell', true);
+  d3.select(selector).selectAll('div.fixed-cell')
+    .data(data)
+    .exit()
+    .remove();
+  d3.select(selector).selectAll('div.fixed-cell')
+    .data(data)
+    .style('margin-left', function (d) {
+      return scale(d) + 'px';
+    })
+    .html(function (d) {
+      let format = d3.timeFormat('%x');
+      return format(d) + '<br>' + scale(d) + 'px';
+    });
+}
+
+render(data, time, '#time');
+</script>
 </body>
 
 </html>

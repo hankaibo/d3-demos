@@ -11,58 +11,58 @@
 </head>
 
 <body>
-  <div id="compound" class="clear">
-    <span>复合对象
-      <br>
-    </span>
-  </div>
+<div id="compound" class="clear">
+  <p>复合对象</p>
+</div>
 
-  <script>
-    var max = 21,
-      data = [];
-    var compoundScale = d3.scalePow()
-      .exponent(2)
-      .domain([0, max])
-      .range([{
-          color: '#add8e6',
-          height: '15px'
-        },
-        {
-          color: '#4169e1',
-          height: '150px'
-        }
-      ]);
-    for (var i = 0; i < max; i++) {
-      data.push(i);
+<script>
+let max = 21,
+  data = [];
+let compoundScale = d3.scalePow()
+  .exponent(2)
+  .domain([0, max])
+  .range([
+    {
+      color: '#add8e6',
+      height: '15px'
+    },
+    {
+      color: '#4169e1',
+      height: '150px'
     }
+  ]);
+for (let i = 0; i < max; i++) {
+  data.push(i);
+}
 
-    function render(data, scale, selector) {
-      d3.select(selector).selectAll('div.v-bar')
-        .data(data)
-        .enter()
-        .append('div')
-        .classed('v-bar', true)
-        .append('span');
-      d3.select(selector).selectAll('div.v-bar')
-        .data(data)
-        .exit()
-        .remove();
-      d3.select(selector).selectAll('div.v-bar')
-        .data(data)
-        .classed('v-bar', true)
-        .style('height', function (d, i) {
-          return scale(d).height;
-        })
-        .style('background-color', function (d) {
-          return scale(d).color;
-        })
-        .select('span')
-        .text(function (d, i) {
-          return i;
-        });
-    }
-    render(data, compoundScale, '#compound');
-  </script>
+function render(data, scale, selector) {
+  d3.select(selector).selectAll('div.v-bar')
+    .data(data)
+    .enter()
+    .append('div')
+    .classed('v-bar', true)
+    .append('span');
+  d3.select(selector).selectAll('div.v-bar')
+    .data(data)
+    .exit()
+    .remove();
+  d3.select(selector).selectAll('div.v-bar')
+    .data(data)
+    .classed('v-bar', true)
+    .style('height', function (d, i) {
+      return scale(d).height;
+    })
+    .style('background-color', function (d) {
+      return scale(d).color;
+    })
+    .select('span')
+    .text(function (d, i) {
+      return i;
+    });
+}
+
+render(data, compoundScale, '#compound');
+</script>
 </body>
 
 </html>

@@ -84,7 +84,9 @@ button {
   background-color: black;
 }
 
-.clear {
+.clear::after {
+  content: " ";
+  display: block;
   clear: both;
 }
 

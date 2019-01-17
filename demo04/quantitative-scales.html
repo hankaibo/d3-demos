@@ -11,75 +11,81 @@
 </head>
 
 <body>
-  <p>等价尺度</p>
-  <div id="linear" class="clear">
-    <span>n</span>
-  </div>
-  <p>线性尺度</p>
-  <div id="linear-capped" class="clear">
-    <span>1 &lt;= a*n + b &lt;= 20</span>
-  </div>
-  <p>简单的幂级尺度</p>
-  <div id="pow" class="clear">
-    <span>n^2</span>
-  </div>
-  <div id="pow-capped" class="clear">
-    <span>1 &lt;= a*n^2 + b &lt;= 10</span>
-  </div>
-  <p>对数尺度</p>
-  <div id="log" class="clear">
-    <span>log(n)</span>
-  </div>
-  <div id="log-capped" class="clear">
-    <span>1 &lt;= a*log(n) + b &lt;= 10</span>
-  </div>
-  <script>
-    var max = 11,
-      data = [];
-    for (var i = 1; i < max; i++) {
-      data.push(i);
-    }
-    var linear = d3.scaleLinear()
-      .domain([1, 10])
-      .range([1, 10]);
-    var linearCapped = d3.scaleLinear()
-      .domain([1, 10])
-      .range([1, 20]);
-    var pow = d3.scalePow().exponent(2);
-    var powCapped = d3.scalePow()
-      .exponent(2)
-      .domain([1, 10])
-      .rangeRound([1, 10]);
-    var log = d3.scaleLog();
-    var logCapped = d3.scaleLog()
-      .domain([1, 10])
-      .rangeRound([1, 10]);
-    var f = d3.format('.2f');
+<p>等价尺度</p>
+<div id="linear" class="clear">
+  <span>n</span>
+</div>
+<p>线性尺度</p>
+<div id="linear-capped" class="clear">
+  <span>1 &lt;= a*n + b &lt;= 20</span>
+</div>
+<p>简单的幂级尺度</p>
+<div id="pow" class="clear">
+  <span>n^2</span>
+</div>
+<div id="pow-capped" class="clear">
+  <span>1 &lt;= a*n^2 + b &lt;= 10</span>
+</div>
+<p>对数尺度</p>
+<div id="log" class="clear">
+  <span>log(n)</span>
+</div>
+<div id="log-capped" class="clear">
+  <span>1 &lt;= a*log(n) + b &lt;= 10</span>
+</div>
+<script>
+let max = 11,
+  data = [];
+for (let i = 1; i < max; i++) {
+  data.push(i);
+}
 
-    function render(data, scale, selector) {
-      d3.select(selector).selectAll('div.cell')
-        .data(data)
-        .enter()
-        .append('div')
-        .classed('cell', true);
-      d3.select(selector).selectAll('div.cell')
-        .data(data)
-        .exit()
-        .remove();
-      d3.select(selector).selectAll('div.cell')
-        .data(data)
-        .style('display', 'inline-block')
-        .text(function (d) {
-          return f(scale(d));
-        });
-    }
-    render(data, linear, '#linear');
-    render(data, linearCapped, '#linear-capped');
-    render(data, pow, '#pow');
-    render(data, powCapped, '#pow-capped');
-    render(data, log, '#log');
-    render(data, logCapped, '#log-capped');
-  </script>
+let linear = d3.scaleLinear()
+  .domain([1, 10])
+  .range([1, 10]);
+
+let linearCapped = d3.scaleLinear()
+  .domain([1, 10])
+  .range([1, 20]);
+
+let pow = d3.scalePow().exponent(2);
+let powCapped = d3.scalePow()
+  .exponent(2)
+  .domain([1, 10])
+  .rangeRound([1, 10]);
+
+let log = d3.scaleLog();
+let logCapped = d3.scaleLog()
+  .domain([1, 10])
+  .rangeRound([1, 10]);
+
+let f = d3.format('.2f');
+
+function render(data, scale, selector) {
+  d3.select(selector).selectAll('div.cell')
+    .data(data)
+    .enter()
+    .append('div')
+    .classed('cell', true);
+  d3.select(selector).selectAll('div.cell')
+    .data(data)
+    .exit()
+    .remove();
+  d3.select(selector).selectAll('div.cell')
+    .data(data)
+    .style('display', 'inline-block')
+    .text(function (d) {
+      return f(scale(d));
+    });
+}
+
+render(data, linear, '#linear');
+render(data, linearCapped, '#linear-capped');
+render(data, pow, '#pow');
+render(data, powCapped, '#pow-capped');
+render(data, log, '#log');
+render(data, logCapped, '#log-capped');
+</script>
 </body>
 
 </html>
