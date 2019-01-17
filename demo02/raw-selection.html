@@ -11,42 +11,56 @@
 </head>
 
 <body>
-  <p>d3.v3:一个数组，该数组对象包含所匹配元素的数组，外加一个parentNode对象。</p>
-  <p>d3.v4:一个对象，包含匹配元素组成的数组对象_groups和一个_parents对象。</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Time</th>
-        <th>Type</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>10:22</td>
-        <td>Purchase</td>
-        <td>$10.00</td>
-      </tr>
-      <tr>
-        <td>12:12</td>
-        <td>Purchase</td>
-        <td>$12.50</td>
-      </tr>
-      <tr>
-        <td>14:11</td>
-        <td>Expense</td>
-        <td>70</td>
-      </tr>
-    </tbody>
-  </table>
-  <script>
-    var rows = d3.selectAll('tr');
-    var headerElement = rows._groups[0][0];
-    d3.select(headerElement).attr('class', 'table-header');
-    d3.select(rows._groups[0][1]).attr('class', 'table-row-odd');
-    d3.select(rows._groups[0][2]).attr('class', 'table-row-even');
-    d3.select(rows._groups[0][3]).attr('class', 'table-row-odd');
-  </script>
+<p>d3.v3:一个数组，该数组对象包含所匹配元素的数组，外加一个parentNode对象。</p>
+<p>d3.v4:一个对象，包含匹配元素组成的数组对象_groups和一个_parents对象。</p>
+<p>d3.v5:一个对象，包含匹配元素组成的数组对象_groups和一个_parents对象。</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>10:22</td>
+    <td>Purchase</td>
+    <td>$10.00</td>
+  </tr>
+  <tr>
+    <td>12:12</td>
+    <td>Purchase</td>
+    <td>$12.50</td>
+  </tr>
+  <tr>
+    <td>14:11</td>
+    <td>Expense</td>
+    <td>70</td>
+  </tr>
+  </tbody>
+</table>
+<script>
+let rows = d3.selectAll('tr');
+let headerElement = rows._groups[0][0];
+d3.select(headerElement).attr('class', 'table-header');
+// 1
+// d3.select(rows._groups[0][1]).attr('class', 'table-row-odd');
+// d3.select(rows._groups[0][2]).attr('class', 'table-row-even');
+// d3.select(rows._groups[0][3]).attr('class', 'table-row-odd');
+
+// 2
+rows
+  .each(function (d, i) {
+    i > 0 && d3.select(this).attr('class', i % 2 === 0 ? 'table-row-odd' : 'table-row-even');
+  });
+
+// 3
+for (let i = 1; i < rows._groups[0].length; i++) {
+  let item = rows._groups[0][i];
+  item.className = i % 2 !== 0 ? 'table-row-odd' : 'table-row-even';
+}
+</script>
 </body>
 
 </html>

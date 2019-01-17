@@ -11,23 +11,23 @@
 </head>
 
 <body>
-  <section id="section1">
-    <div>
-      <p>blue box</p>
-    </div>
-  </section>
-  <section id="section2">
-    <div>
-      <p>red box</p>
-    </div>
-  </section>
-  <script>
-    d3.select('#section1>div') // W3C选择器
-      .attr('class', 'blue box');
-    d3.select('#section2') // D3选择器
-      .select('div')
-      .attr('class', 'red box');
-  </script>
+<section id="section1">
+  <div>
+    <p>blue box</p>
+  </div>
+</section>
+<section id="section2">
+  <div>
+    <p>red box</p>
+  </div>
+</section>
+<script>
+d3.select('#section1>div') // W3C选择器
+  .attr('class', 'blue box');
+d3.select('#section2') // D3选择器
+  .select('div')
+  .attr('class', 'red box');
+</script>
 </body>
 
 </html>
