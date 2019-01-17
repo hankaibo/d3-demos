@@ -11,40 +11,50 @@
 </head>
 
 <body>
-  <div id="container"></div>
-  <script>
-    var data = [];
-    var next = function (x) {
-      return 15 + x * x;
-    };
-    var newData = function () {
-      data.push(next);
-      return data;
-    }
+<div id="container"></div>
+<script>
+let data = [];
+let next = function (x) {
+  return 15 + x * x;
+};
+let newData = function () {
+  data.push(next);
+  return data;
+};
 
-    function render() {
-      var selection = d3.select('#container')
-        .selectAll('div')
-        .data(newData);
-      selection.enter()
-        .append('div')
-        .append('span');
-      selection.exit()
-        .remove();
-      selection.attr('class', 'v-bar')
-        .style('height', function (d, i) {
-          return d(i) + 'px';
-        })
-        .select('span')
-        .text(function (d, i) {
-          return d(i);
-        });
-    }
-    setInterval(function () {
-      render();
-    }, 1500);
-    render();
-  </script>
+function render() {
+  console.log(newData);
+  let selection = d3.select('#container')
+    .selectAll('div')
+    .data(newData);
+  selection.enter()
+    .append('div')
+    .attr('class', 'v-bar')
+    .style('height', function (d, i) {
+      return d(i) + 'px';
+    })
+    .append('span')
+    .text(function (d, i) {
+      return d(i);
+    });
+  // 因为数据是增量，并且enter时我已作了数据映射，故exit与update可删除。
+  selection.exit()
+    .remove();
+  selection.attr('class', 'v-bar')
+    .style('height', function (d, i) {
+      return d(i) + 'px';
+    })
+    .select('span')
+    .text(function (d, i) {
+      return d(i);
+    });
+}
+
+setInterval(function () {
+  render();
+}, 1500);
+render();
+</script>
 </body>
 
 </html>
