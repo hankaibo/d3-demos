@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>events</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+<body>
+<script>
+let body = d3.select('body');
+let duration = 3000;
+
+let div = body.append('div')
+  .classed('box', 'true')
+  .style('background-color', 'steelblue')
+  .style('color', 'white')
+  .text('waiting')
+  .transition()
+  .duration(duration)
+  .delay(1000)
+  .on('start', function () {
+    console.log(arguments);
+    d3.select(this).text(function (d, i) {
+      return 'transitioning';
+    });
+  })
+  .on('end', function () {
+    d3.select(this).text(function (d, i) {
+      return 'done';
+    });
+  })
+  .style('margin-left', '600px');
+</script>
+</body>
+</html>

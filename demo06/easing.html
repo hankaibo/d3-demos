@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>easing</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../build/d3.js"></script>
+</head>
+<body>
+<script>
+let data = [
+  'easeLinear',
+  // 'easePolyIn',
+  // 'easePolyOut',
+  'easePoly',
+  // 'easePolyInOut',
+  // 'easeQuadIn',
+  // 'easeQuadOut',
+  'easeQuad',
+  // 'easeQuadInOut',
+  // 'easeCubicIn',
+  // 'easeCubicOut',
+  'easeCubic',
+  // 'easeCubicInOut',
+  // 'easeSinIn',
+  // 'easeSinOut',
+  'easeSin',
+  // 'easeSinInOut',
+  // 'easeExpIn',
+  // 'easeExpOut',
+  'easeExp',
+  // 'easeExpInOut',
+  // 'easeCircleIn',
+  // 'easeCircleOut',
+  'easeCircle',
+  // 'easeCircleInOut',
+  // 'easeElasticIn',
+  // 'easeElasticOut',
+  'easeElastic',
+  // 'easeElasticInOut',
+  // 'easeBackIn',
+  // 'easeBackOut',
+  'easeBack',
+  // 'easeBackInOut',
+  // 'easeBounceIn',
+  // 'easeBounceOut',
+  'easeBounce',
+  // 'easeBounceInOut',
+];
+let colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+d3.select('body')
+  .selectAll('div')
+  .data(data)
+  .enter()
+  .append('div')
+  .attr('class', 'fixed-cell')
+  .style('top', function (d, i) {
+    return i * 40 + 'px';
+  })
+  .style('background-color', function (d, i) {
+    return colors(i);
+  })
+  .style('color', 'white')
+  .style('left', '500px')
+  .text(function (d) {
+    if (typeof d === 'function') {
+      return 'custom';
+    }
+    return d;
+  });
+
+d3.selectAll('div')
+  .each(function (d) {
+    d3.select(this)
+      .transition()
+      .ease(d3[d])
+      .duration(15000)
+      .style('left', '10px');
+  })
+</script>
+</body>
+</html>
