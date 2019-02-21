@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>line</title>
+  <title>line-interpolation</title>
   <link rel="stylesheet" href="../css/style.css">
   <script src="../build/d3.js"></script>
 </head>
@@ -14,7 +14,7 @@
 <script>
 let width = 500;
 let height = 500;
-let margin = 50;
+let margin = 30;
 let x = d3.scaleLinear()
   .domain([0, 10])
   .range([margin, width - margin]);
@@ -32,11 +32,10 @@ let data = [
   }, {
     x: 2,
     y: 7
-  },
-    {
-      x: 3,
-      y: 5
-    }, {
+  }, {
+    x: 3,
+    y: 5
+  }, {
     x: 4,
     y: 3
   }, {
@@ -60,29 +59,55 @@ let data = [
   })
 ];
 
-let line = d3.line()
-  .x(function (d) {
-    return x(d.x);
-  })
-  .y(function (d) {
-    return y(d.y);
-  });
-
 let svg = d3.select('body').append('svg');
 
 svg.attr('height', height)
   .attr('width', width);
 
-svg.selectAll('path')
-  .data(data)
-  .enter()
-  .append('path')
-  .attr('class', 'line')
-  .attr('d', function (d) {
-    return line(d);
-  });
-
 renderAxes(svg);
+render('linear');
+renderDots(svg);
+
+function render(mode) {
+  let line = d3.line()
+    // .interpolate(mode)
+    .x(function (d) {
+      return x(d.x);
+    })
+    .y(function (d) {
+      return y(d.y);
+    });
+
+  svg.selectAll('path.line')
+    .data(data)
+    .enter()
+    .append('path')
+    .attr('class', 'line');
+
+  svg.selectAll('path.line')
+    .data(data)
+    .attr('d', function (d) {
+      return line(d);
+    })
+}
+
+function renderDots(svg) {
+  data.forEach(function (set) {
+    svg.append('g')
+      .selectAll('circle')
+      .data(set)
+      .enter()
+      .append('circle')
+      .attr('class', 'dot')
+      .attr('cx', function (d) {
+        return x(d.x);
+      })
+      .attr('cy', function (d) {
+        return y(d.y);
+      })
+      .attr('r', 4.5);
+  })
+}
 
 function renderAxes(svg) {
   let xAxis = d3.axisBottom()
@@ -112,10 +137,6 @@ function xStart() {
 
 function yStart() {
   return height - margin;
-}
-
-function xEnd() {
-  return width - margin;
 }
 
 function yEnd() {
